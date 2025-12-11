@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save System Test - UniVerse AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        h1 {
+            color: #2563eb;
+        }
+        .section {
+            background: #2a2a2a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 1px solid #444;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background: #1d4ed8;
+        }
+        .success {
+            background: #10b981;
+        }
+        .danger {
+            background: #ef4444;
+        }
+        .output {
+            background: #1a1a1a;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #555;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background: #1a1a1a;
+            border: 1px solid #555;
+            color: #fff;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+        .info {
+            color: #60a5fa;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Save Prompt System Test</h1>
+    <p class="info">Use this page to test the save/load functionality between chat.html and library.html</p>
+
+    <!-- Test Section 1: Manual Save -->
+    <div class="section">
+        <h2>1️⃣ Manual Save Test</h2>
+        <p>Manually save a prompt-response pair</p>
+        <input type="text" id="testPrompt" placeholder="Enter test prompt..." value="What is JavaScript?">
+        <textarea id="testResponse" rows="3" placeholder="Enter test response...">JavaScript is a high-level, interpreted programming language that is widely used for web development.</textarea>
+        <button onclick="testManualSave()">Save Test Data</button>
+        <div id="saveResult" class="output"></div>
+    </div>
+
+    <!-- Test Section 2: View All Saved -->
+    <div class="section">
+        <h2>2️⃣ View All Saved Prompts</h2>
+        <p>Display all prompts currently in localStorage</p>
+        <button onclick="viewAllSaved()">View All Prompts</button>
+        <button onclick="refreshView()" class="success">Refresh View</button>
+        <div id="viewResult" class="output"></div>
+    </div>
+
+    <!-- Test Section 3: Test Storage Key -->
+    <div class="section">
+        <h2>3️⃣ Storage Diagnostics</h2>
+        <p>Check localStorage configuration</p>
+        <button onclick="checkStorage()">Check Storage</button>
+        <button onclick="clearStorage()" class="danger">Clear All Saved Prompts</button>
+        <div id="storageResult" class="output"></div>
+    </div>
+
+    <!-- Test Section 4: Navigate to Pages -->
+    <div class="section">
+        <h2>4️⃣ Navigation Test</h2>
+        <p>Navigate to actual pages to verify integration</p>
+        <button onclick="goToChat()">Go to Chat Page</button>
+        <button onclick="goToLibrary()">Go to Library Page</button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="save-prompt-system.js"></script>
+    <script>
+        // Test Functions
+        function testManualSave() {
+            const prompt = document.getElementById('testPrompt').value.trim();
+            const response = document.getElementById('testResponse').value.trim();
+            const output = document.getElementById('saveResult');
+
+            if (!prompt || !response) {
+                output.innerHTML = '<span style="color: #ef4444;">❌ Please enter both prompt and response</span>';
+                return;
+            }
+
+            try {
+                const entry = window.SavePromptSystem.savePrompt(prompt, response, {
+                    model: 'test-model',
+                    source: 'test-page'
+                });
+
+                output.innerHTML = `
+                    <span style="color: #10b981;">✅ Successfully saved!</span><br><br>
+                    <strong>Entry Details:</strong><br>
+                    ID: ${entry.id}<br>
+                    Prompt: ${entry.prompt}<br>
+                    Response: ${entry.response.substring(0, 100)}...<br>
+                    Category: ${entry.category}<br>
+                    Tags: ${entry.tags.join(', ')}<br>
+                    Saved At: ${new Date(entry.savedAt).toLocaleString()}<br><br>
+                    <strong>Total Saved:</strong> ${window.SavePromptSystem.getAllPrompts().length}
+                `;
+            } catch (error) {
+                output.innerHTML = `<span style="color: #ef4444;">❌ Error: ${error.message}</span>`;
+            }
+        }
+
+        function viewAllSaved() {
+            const output = document.getElementById('viewResult');
+            const prompts = window.SavePromptSystem.getAllPrompts();
+
+            if (prompts.length === 0) {
+                output.innerHTML = '<span style="color: #f59e0b;">⚠️ No saved prompts found</span>';
+                return;
+            }
+
+            let html = `<span style="color: #10b981;">✅ Found ${prompts.length} saved prompt(s):</span><br><br>`;
+            
+            prompts.forEach((p, index) => {
+                html += `
+                    <div style="margin-bottom: 15px; padding: 10px; background: #2a2a2a; border-left: 3px solid #2563eb;">
+                        <strong>#${index + 1}</strong><br>
+                        <strong>ID:</strong> ${p.id}<br>
+                        <strong>Prompt:</strong> ${p.prompt.substring(0, 60)}...<br>
+                        <strong>Response:</strong> ${p.response.substring(0, 80)}...<br>
+                        <strong>Category:</strong> ${p.category}<br>
+                        <strong>Saved:</strong> ${new Date(p.savedAt).toLocaleString()}<br>
+                    </div>
+                `;
+            });
+
+            output.innerHTML = html;
+        }
+
+        function refreshView() {
+            viewAllSaved();
+        }
+
+        function checkStorage() {
+            const output = document.getElementById('storageResult');
+            const storageKey = window.SavePromptSystem.storageKey;
+            const rawData = localStorage.getItem(storageKey);
+            const stats = window.SavePromptSystem.getStatistics();
+
+            let html = `
+                <strong>Storage Configuration:</strong><br>
+                Storage Key: ${storageKey}<br>
+                Raw Data Length: ${rawData ? rawData.length : 0} characters<br>
+                Parsed Prompts: ${stats.total}<br><br>
+                
+                <strong>Statistics:</strong><br>
+                Total Prompts: ${stats.total}<br>
+                Favorites: ${stats.favorites}<br>
+                Total Views: ${stats.totalViews}<br>
+                Categories: ${JSON.stringify(stats.categories)}<br><br>
+                
+                <strong>Raw Data Preview:</strong><br>
+                ${rawData ? rawData.substring(0, 200) + '...' : 'No data'}
+            `;
+
+            output.innerHTML = html;
+        }
+
+        function clearStorage() {
+            if (confirm('Are you sure you want to clear ALL saved prompts? This cannot be undone.')) {
+                window.SavePromptSystem.clearAll();
+                document.getElementById('storageResult').innerHTML = '<span style="color: #10b981;">✅ All prompts cleared</span>';
+                viewAllSaved();
+                checkStorage();
+            }
+        }
+
+        function goToChat() {
+            window.location.href = 'chat.html';
+        }
+
+        function goToLibrary() {
+            window.location.href = 'library.html';
+        }
+
+        // Auto-run diagnostics on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                checkStorage();
+                viewAllSaved();
+            }, 100);
+        });
+    </script>
+</body>
+</html>

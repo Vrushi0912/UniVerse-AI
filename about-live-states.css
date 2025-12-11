@@ -1,0 +1,531 @@
+/*========================================
+  TEXT ALIGNMENT & DYNAMIC LIVE STATES
+  Premium About Page Enhancements
+  ========================================*/
+
+/* ============================================
+   TEXT ALIGNMENT FIXES
+   ============================================ */
+
+/* Center all main headings */
+.section-title {
+    text-align: center !important;
+    width: 100% !important;
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Better spacing for container */
+.container {
+    padding: 3rem 2rem !important;
+}
+
+/* Enhanced feature card text alignment */
+.feature-card h2,
+.feature-card h3 {
+    text-align: left !important;
+}
+
+.feature-card p {
+    text-align: left !important;
+    line-height: 1.8 !important;
+}
+
+/* Technology Stack Grid - Better alignment */
+.feature-card .features-grid {
+    text-align: left !important;
+}
+
+.feature-card .features-grid>div {
+    padding: 1.5rem;
+    background: rgba(6, 182, 212, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(6, 182, 212, 0.1);
+    transition: all 0.3s;
+}
+
+.feature-card .features-grid>div:hover {
+    background: rgba(6, 182, 212, 0.08);
+    border-color: rgba(6, 182, 212, 0.3);
+    transform: translateY(-3px);
+}
+
+/* Use Cases - Better spacing */
+.feature-card>div[style*="line-height"] {
+    text-align: left !important;
+}
+
+.feature-card>div[style*="line-height"]>p {
+    margin-bottom: 1rem !important;
+    padding: 1rem 1.5rem !important;
+}
+
+/* Project Details - Improved layout */
+.feature-card>p {
+    margin-bottom: 0.75rem !important;
+    padding-left: 0.5rem;
+}
+
+/* ============================================
+   DYNAMIC LIVE STATE: LOADING INDICATOR
+   ============================================ */
+
+/* Page loading overlay */
+.page-loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0a0e1a 0%, #0f172a 50%, #1e1b4b 100%);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.page-loading-overlay.loaded {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Loading spinner */
+.loading-spinner {
+    width: 80px;
+    height: 80px;
+    border: 4px solid rgba(6, 182, 212, 0.1);
+    border-top: 4px solid #06b6d4;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    box-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Loading text */
+.loading-text {
+    color: #06b6d4;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+    animation: loadingPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   DYNAMIC LIVE STATE: PROGRESS BAR
+   ============================================ */
+
+/* Page scroll progress bar */
+.scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #06b6d4, #3b82f6, #8b5cf6);
+    z-index: 9998;
+    transition: width 0.1s ease;
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.6);
+}
+
+/* ============================================
+   DYNAMIC LIVE STATE: NAVBAR STATES
+   ============================================ */
+
+/* Active nav link indicator - REMOVED to eliminate glitch effect */
+/* .nav-menu a {
+    position: relative;
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: #06b6d4;
+    border-radius: 50%;
+    opacity: 0;
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.8);
+    transition: opacity 0.3s;
+}
+
+.nav-menu a.active::after {
+    opacity: 1;
+    animation: navDotPulse 2s ease-in-out infinite;
+}
+
+@keyframes navDotPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px rgba(6, 182, 212, 0.8);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(6, 182, 212, 1),
+            0 0 30px rgba(6, 182, 212, 0.6);
+    }
+} */
+
+/* ============================================
+   DYNAMIC LIVE STATE: CARD STATES
+   ============================================ */
+
+/* Card active state (when clicked) */
+.feature-card.active {
+    border-color: rgba(6, 182, 212, 0.6) !important;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5),
+        0 0 80px rgba(6, 182, 212, 0.3),
+        inset 0 0 30px rgba(6, 182, 212, 0.05) !important;
+}
+
+/* Card loading state */
+.feature-card.loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.feature-card.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(6, 182, 212, 0.2);
+    border-top-color: #06b6d4;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* ============================================
+   DYNAMIC LIVE STATE: BUTTON STATES
+   ============================================ */
+
+/* Generic button styling for future use */
+.btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Button loading state */
+.btn.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+/* ============================================
+   DYNAMIC LIVE STATE: HOVER INDICATORS
+   ============================================ */
+
+/* Hover state indicator for interactive elements */
+.nav-menu a:hover,
+.feature-card:hover,
+.logo:hover {
+    cursor: pointer;
+}
+
+/* Visual feedback on click */
+.nav-menu a:active,
+.feature-card:active {
+    transform: scale(0.98) !important;
+}
+
+/* ============================================
+   DYNAMIC LIVE STATE: BADGE INDICATORS
+   ============================================ */
+
+/* New content badge */
+.new-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: linear-gradient(135deg, #06b6d4, #3b82f6);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 12px;
+    margin-left: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 25px rgba(6, 182, 212, 0.8),
+            0 0 40px rgba(6, 182, 212, 0.4);
+    }
+}
+
+/* Status indicator dot */
+.status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+}
+
+/* ============================================
+   DYNAMIC LIVE STATE: TOOLTIP
+   ============================================ */
+
+/* Tooltip container */
+[data-tooltip] {
+    position: relative;
+}
+
+[data-tooltip]::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-5px);
+    padding: 0.5rem 1rem;
+    background: rgba(6, 182, 212, 0.95);
+    color: white;
+    font-size: 0.875rem;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(6, 182, 212, 0.4);
+    z-index: 1000;
+}
+
+[data-tooltip]::after {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(6, 182, 212, 0.95);
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+}
+
+[data-tooltip]:hover::before,
+[data-tooltip]:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================
+   DYNAMIC LIVE STATE: NOTIFICATIONS
+   ============================================ */
+
+/* Notification toast */
+.notification-toast {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    background: rgba(6, 182, 212, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(6, 182, 212, 0.4);
+    z-index: 9997;
+    transform: translateX(400px);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.notification-toast.show {
+    transform: translateX(0);
+}
+
+.notification-toast.success {
+    background: rgba(16, 185, 129, 0.95);
+    box-shadow: 0 8px 32px rgba(16, 185, 129, 0.4);
+}
+
+.notification-toast.error {
+    background: rgba(239, 68, 68, 0.95);
+    box-shadow: 0 8px 32px rgba(239, 68, 68, 0.4);
+}
+
+/* ============================================
+   DYNAMIC LIVE STATE: SKELETON LOADING
+   ============================================ */
+
+/* Skeleton loader for cards */
+.skeleton {
+    background: linear-gradient(90deg,
+            rgba(6, 182, 212, 0.05) 25%,
+            rgba(6, 182, 212, 0.15) 50%,
+            rgba(6, 182, 212, 0.05) 75%);
+    background-size: 200% 100%;
+    animation: skeletonLoading 1.5s ease-in-out infinite;
+    border-radius: 8px;
+}
+
+@keyframes skeletonLoading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.skeleton-text {
+    height: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.skeleton-title {
+    height: 2rem;
+    margin-bottom: 1rem;
+    width: 60%;
+}
+
+/* ============================================
+   DYNAMIC LIVE STATE: ACTIVE SECTION HIGHLIGHT
+   ============================================ */
+
+/* Highlight current section in viewport */
+.feature-card.in-viewport {
+    border-color: rgba(6, 182, 212, 0.3) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 50px rgba(6, 182, 212, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+/* ============================================
+   DYNAMIC LIVE STATE: FOOTER STATUS
+   ============================================ */
+
+.footer {
+    position: relative;
+}
+
+/* Online status indicator in footer */
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 10px;
+    height: 10px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.8);
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+    .notification-toast {
+        right: 10px;
+        left: 10px;
+        transform: translateY(-100px);
+    }
+
+    .notification-toast.show {
+        transform: translateY(0);
+    }
+
+    .scroll-progress-bar {
+        height: 2px;
+    }
+}
+
+/* ============================================
+   SMOOTH TRANSITIONS
+   ============================================ */
+
+* {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - UniVerse AI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">🌌</span>
+                <span class="logo-text">UniVerse AI</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="auth.html">Chat AI</a></li>
+                <li><a href="library.html">Library</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="generator-container">
+        <div class="generator-header">
+            <h1>Projects</h1>
+            <p>Organize saved code and export to GitHub</p>
+        </div>
+
+        <div class="input-section" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
+            <input type="text" id="projectSearch" placeholder="Search projects"
+                style="grid-column:1/2;padding:0.75rem;">
+            <select id="projectFilter" style="grid-column:2/3;padding:0.75rem;">
+                <option value="all">All</option>
+                <option value="recent">Recent</option>
+            </select>
+        </div>
+
+        <div class="results-section" id="projectList">
+            <div class="result-card full-width">
+                <h2><svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <rect x="3" y="4" width="18" height="14" rx="2" />
+                        <path d="M7 8h10" />
+                        <path d="M7 12h6" />
+                    </svg> Saved Projects</h2>
+                <p>No projects yet. Your exported code and assets will appear here.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 UniVerse AI</p>
+        </div>
+    </footer>
+
+    <script>
+        const key = 'universe_projects';
+        const list = document.getElementById('projectList');
+        const search = document.getElementById('projectSearch');
+        const filter = document.getElementById('projectFilter');
+        function load() {
+            const items = JSON.parse(localStorage.getItem(key) || '[]');
+            render(items);
+        }
+        function render(items) {
+            list.innerHTML = '';
+            if (items.length === 0) {
+                const card = document.createElement('div');
+                card.className = 'result-card full-width';
+                card.innerHTML = '<h2>Saved Projects</h2><p>No projects yet.</p>';
+                list.appendChild(card);
+                return;
+            }
+            items.forEach(i => {
+                const card = document.createElement('div');
+                card.className = 'result-card';
+                card.innerHTML = `<h3>${i.name}</h3><p>${i.description || ''}</p><button class="download-btn" onclick="exportProject(${JSON.stringify(i).replace(/"/g, '&quot;')})">Export</button>`;
+                list.appendChild(card);
+            });
+        }
+        function exportProject(item) {
+            const blob = new Blob([JSON.stringify(item, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${item.name.replace(/[^a-z0-9]/gi, '_')}_${Date.now()}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        search.addEventListener('input', () => {
+            const items = JSON.parse(localStorage.getItem(key) || '[]');
+            const q = search.value.toLowerCase();
+            render(items.filter(i => (i.name || '').toLowerCase().includes(q)));
+        });
+        filter.addEventListener('change', () => {
+            const items = JSON.parse(localStorage.getItem(key) || '[]');
+            render(items);
+        });
+        load();
+    </script>
+</body>
+
+</html>

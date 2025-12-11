@@ -1,0 +1,181 @@
+/*========================================
+  DOCUMENTATION PAGE DYNAMIC LIVE STATES
+  Interactive Elements & Real-time Feedback
+  ========================================*/
+
+/* ============================================
+   SCROLL PROGRESS BAR
+   ============================================ */
+
+.scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #06b6d4, #3b82f6, #8b5cf6);
+    z-index: 9999;
+    transition: width 0.1s ease;
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.7);
+}
+
+/* ============================================
+   NAVBAR SCROLL STATE
+   ============================================ */
+
+.navbar {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   INTERACTIVE CARD STATES
+   ============================================ */
+
+/* Card Active State (When Clicked) */
+.feature-card.active {
+    border-color: rgba(6, 182, 212, 0.6) !important;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6),
+        0 0 80px rgba(6, 182, 212, 0.3),
+        inset 0 0 30px rgba(6, 182, 212, 0.05) !important;
+}
+
+/* Card In Viewport Highlight */
+.feature-card.in-viewport {
+    border-color: rgba(6, 182, 212, 0.25) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+        0 0 50px rgba(6, 182, 212, 0.1) !important;
+}
+
+/* ============================================
+   SECTION HEADING STATES
+   ============================================ */
+
+.feature-card h2:hover {
+    text-shadow: 0 0 30px rgba(6, 182, 212, 0.6),
+        0 0 50px rgba(6, 182, 212, 0.3);
+}
+
+/* ============================================
+   LIST ITEM INTERACTIVE STATES
+   ============================================ */
+
+/* Ordered List Hover Enhancement */
+.feature-card ol li:hover::before {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(6, 182, 212, 0.9),
+        0 0 50px rgba(6, 182, 212, 0.4);
+}
+
+/* ============================================
+   TOOLTIP SYSTEM
+   ============================================ */
+
+[data-tooltip] {
+    position: relative;
+}
+
+[data-tooltip]::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-5px);
+    padding: 0.5rem 1rem;
+    background: rgba(6, 182, 212, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: white;
+    font-size: 0.875rem;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(6, 182, 212, 0.4);
+    z-index: 1000;
+}
+
+[data-tooltip]::after {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(6, 182, 212, 0.95);
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+}
+
+[data-tooltip]:hover::before,
+[data-tooltip]:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================
+   SMOOTH SCROLL BEHAVIOR
+   ============================================ */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ============================================
+   ACTIVE SECTION INDICATOR
+   ============================================ */
+
+.section-indicator {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.section-indicator-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid transparent;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.section-indicator-dot.active {
+    background: #06b6d4;
+    border-color: #06b6d4;
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.8);
+    transform: scale(1.3);
+}
+
+.section-indicator-dot:hover {
+    background: rgba(6, 182, 212, 0.5);
+    transform: scale(1.2);
+}
+
+/* ============================================
+   RESPONSIVE MOBILE STATES
+   ============================================ */
+
+@media (max-width: 768px) {
+    .section-indicator {
+        display: none;
+    }
+
+    .scroll-progress-bar {
+        height: 2px;
+    }
+}
+
+/* ============================================
+   PERFORMANCE & SMOOTH TRANSITIONS
+   ============================================ */
+
+* {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}

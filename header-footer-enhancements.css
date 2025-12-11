@@ -1,0 +1,545 @@
+/*========================================
+  HEADER & FOOTER BAR ENHANCEMENTS
+  Premium Futuristic Styling
+  ========================================*/
+
+/* ============================================
+   ENHANCED HEADER BAR
+   ============================================ */
+
+.chat-header {
+    background: rgba(10, 10, 10, 0.8) !important;
+    backdrop-filter: blur(30px) !important;
+    -webkit-backdrop-filter: blur(30px) !important;
+    border-bottom: 1px solid rgba(96, 165, 250, 0.3) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5),
+        0 0 60px rgba(37, 99, 235, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated gradient overlay for header */
+.chat-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(96, 165, 250, 0.1) 50%,
+            transparent 100%);
+    animation: headerShimmer 8s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes headerShimmer {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+/* Enhanced header title with glow */
+.chat-header h2,
+#chatTitle {
+    color: #fff !important;
+    text-shadow: 0 0 20px rgba(96, 165, 250, 0.5),
+        0 0 40px rgba(96, 165, 250, 0.3);
+    animation: titleGlow 3s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+
+    0%,
+    100% {
+        text-shadow: 0 0 20px rgba(96, 165, 250, 0.5),
+            0 0 40px rgba(96, 165, 250, 0.3);
+    }
+
+    50% {
+        text-shadow: 0 0 30px rgba(96, 165, 250, 0.8),
+            0 0 60px rgba(96, 165, 250, 0.5),
+            0 0 80px rgba(139, 92, 246, 0.3);
+    }
+}
+
+/* Enhanced header buttons */
+.header-btn {
+    background: rgba(26, 26, 26, 0.7) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(96, 165, 250, 0.3) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.header-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.4), transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+.header-btn:hover::before {
+    width: 150px;
+    height: 150px;
+}
+
+.header-btn:hover {
+    background: rgba(37, 99, 235, 0.25) !important;
+    border-color: #3b82f6 !important;
+    color: #fff !important;
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4),
+        0 0 30px rgba(96, 165, 250, 0.3) !important;
+    transform: translateY(-2px) scale(1.05) !important;
+}
+
+.header-btn:active {
+    transform: translateY(0) scale(0.98) !important;
+}
+
+/* Enhanced back to home button */
+.back-to-home {
+    background: rgba(26, 26, 26, 0.7) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(96, 165, 250, 0.3) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.back-to-home::after {
+    content: '🏠';
+    position: absolute;
+    left: -30px;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.back-to-home:hover::after {
+    left: 10px;
+    opacity: 1;
+}
+
+.back-to-home:hover {
+    background: rgba(37, 99, 235, 0.25) !important;
+    border-color: #3b82f6 !important;
+    color: #fff !important;
+    padding-left: 35px !important;
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4),
+        0 0 30px rgba(96, 165, 250, 0.3) !important;
+}
+
+/* Menu toggle button enhancement */
+.menu-toggle {
+    background: rgba(26, 26, 26, 0.7) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(96, 165, 250, 0.3) !important;
+    border-radius: 8px !important;
+    padding: 0.5rem 1rem !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.menu-toggle:hover {
+    background: rgba(37, 99, 235, 0.25) !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.5) !important;
+    transform: rotate(90deg) !important;
+}
+
+/* ============================================
+   ENHANCED FOOTER/INPUT BAR
+   ============================================ */
+
+.input-area {
+    background: rgba(10, 10, 10, 0.85) !important;
+    backdrop-filter: blur(30px) !important;
+    -webkit-backdrop-filter: blur(30px) !important;
+    border-top: 1px solid rgba(96, 165, 250, 0.3) !important;
+    box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.5),
+        0 0 60px rgba(37, 99, 235, 0.1),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.05) !important;
+    position: relative;
+}
+
+/* Animated gradient overlay for footer */
+.input-area::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(96, 165, 250, 0.08) 50%,
+            transparent 100%);
+    animation: footerShimmer 10s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes footerShimmer {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+.input-container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Enhanced attachment/photo buttons */
+.attachment-btn,
+.photo-btn {
+    background: rgba(26, 26, 26, 0.8) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(96, 165, 250, 0.3) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.attachment-btn .icon-svg,
+.photo-btn .icon-svg {
+    filter: drop-shadow(0 0 5px rgba(96, 165, 250, 0.5));
+    transition: all 0.3s;
+}
+
+.attachment-btn::after,
+.photo-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.4), transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
+}
+
+.attachment-btn:hover::after,
+.photo-btn:hover::after {
+    width: 120px;
+    height: 120px;
+}
+
+.attachment-btn:hover,
+.photo-btn:hover {
+    background: rgba(37, 99, 235, 0.3) !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 25px rgba(96, 165, 250, 0.5),
+        0 0 40px rgba(96, 165, 250, 0.3) !important;
+    transform: translateY(-3px) scale(1.1) rotate(5deg) !important;
+}
+
+.attachment-btn:hover .icon-svg,
+.photo-btn:hover .icon-svg {
+    filter: drop-shadow(0 0 15px rgba(96, 165, 250, 0.9));
+    transform: scale(1.15);
+}
+
+/* Enhanced voice button with special animation */
+.voice-btn {
+    background: rgba(26, 26, 26, 0.8) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(96, 165, 250, 0.3) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.voice-btn .icon-svg {
+    filter: drop-shadow(0 0 5px rgba(96, 165, 250, 0.5));
+    transition: all 0.3s;
+}
+
+.voice-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.4), transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
+}
+
+.voice-btn:hover::before {
+    width: 120px;
+    height: 120px;
+}
+
+.voice-btn:hover {
+    background: rgba(37, 99, 235, 0.3) !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 25px rgba(96, 165, 250, 0.5),
+        0 0 40px rgba(96, 165, 250, 0.3) !important;
+    transform: translateY(-3px) scale(1.1) !important;
+}
+
+.voice-btn:hover .icon-svg {
+    filter: drop-shadow(0 0 15px rgba(96, 165, 250, 0.9));
+    animation: micBounce 0.6s ease-in-out;
+}
+
+@keyframes micBounce {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* Voice button recording state - enhanced */
+.voice-btn.recording {
+    background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+    border-color: #ef4444 !important;
+    animation: recordingPulse 1s ease-in-out infinite !important;
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.7),
+        0 0 60px rgba(239, 68, 68, 0.4) !important;
+}
+
+@keyframes recordingPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.7),
+            0 0 40px rgba(239, 68, 68, 0.4);
+    }
+
+    50% {
+        transform: scale(1.15);
+        box-shadow: 0 0 40px rgba(239, 68, 68, 0.9),
+            0 0 80px rgba(239, 68, 68, 0.6);
+    }
+}
+
+.voice-btn.recording .icon-svg {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.9));
+    animation: recordingGlow 1s ease-in-out infinite;
+}
+
+@keyframes recordingGlow {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Enhanced textarea with better focus effect */
+.input-container textarea {
+    background: rgba(26, 26, 26, 0.7) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(96, 165, 250, 0.25) !important;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.input-container textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+    transition: color 0.3s;
+}
+
+.input-container textarea:hover {
+    border-color: rgba(96, 165, 250, 0.4) !important;
+    box-shadow: 0 0 15px rgba(96, 165, 250, 0.2),
+        inset 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+.input-container textarea:focus {
+    background: rgba(26, 26, 26, 0.85) !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 30px rgba(37, 99, 235, 0.5),
+        0 0 60px rgba(96, 165, 250, 0.3),
+        inset 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+    transform: scale(1.01) !important;
+}
+
+.input-container textarea:focus::placeholder {
+    color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Enhanced send button with premium animation */
+.send-btn {
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #60a5fa 100%) !important;
+    background-size: 200% 200% !important;
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.5),
+        0 0 40px rgba(96, 165, 250, 0.3) !important;
+    border: none !important;
+    position: relative !important;
+    overflow: hidden !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    animation: sendButtonGradient 3s ease infinite !important;
+}
+
+@keyframes sendButtonGradient {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.send-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.3) 50%,
+            transparent 70%);
+    animation: sendButtonShine 3s linear infinite;
+}
+
+@keyframes sendButtonShine {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.send-btn span {
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+    transition: transform 0.3s;
+}
+
+.send-btn:hover:not(:disabled) {
+    transform: scale(1.1) rotate(10deg) translateY(-3px) !important;
+    box-shadow: 0 8px 35px rgba(37, 99, 235, 0.7),
+        0 0 60px rgba(96, 165, 250, 0.5),
+        0 0 80px rgba(139, 92, 246, 0.3) !important;
+    animation: sendButtonPulse 1.5s ease-in-out infinite,
+        sendButtonGradient 3s ease infinite !important;
+}
+
+@keyframes sendButtonPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 8px 35px rgba(37, 99, 235, 0.7),
+            0 0 60px rgba(96, 165, 250, 0.5),
+            0 0 80px rgba(139, 92, 246, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 12px 45px rgba(37, 99, 235, 0.9),
+            0 0 80px rgba(96, 165, 250, 0.7),
+            0 0 120px rgba(139, 92, 246, 0.5);
+    }
+}
+
+.send-btn:hover span {
+    transform: translateY(-3px) scale(1.1);
+}
+
+.send-btn:active {
+    transform: scale(0.95) rotate(0deg) translateY(0) !important;
+}
+
+.send-btn:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    animation: none !important;
+}
+
+/* Enhanced input footer text */
+.input-footer {
+    position: relative;
+    z-index: 1;
+}
+
+.input-footer span {
+    color: rgba(255, 255, 255, 0.4) !important;
+    text-shadow: 0 0 10px rgba(96, 165, 250, 0.2);
+    transition: all 0.3s;
+}
+
+.input-footer:hover span {
+    color: rgba(255, 255, 255, 0.6) !important;
+    text-shadow: 0 0 15px rgba(96, 165, 250, 0.4);
+}
+
+/* ============================================
+   ICON GLOW ENHANCEMENTS
+   ============================================ */
+
+/* All SVG icons get glow effect */
+.icon-svg {
+    filter: drop-shadow(0 0 5px rgba(96, 165, 250, 0.4));
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover .icon-svg {
+    filter: drop-shadow(0 0 12px rgba(96, 165, 250, 0.8)) drop-shadow(0 0 20px rgba(96, 165, 250, 0.5));
+}
+
+/* ============================================
+   RESPONSIVE ENHANCEMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+
+    .chat-header::before,
+    .input-area::before {
+        animation-duration: 12s;
+        /* Slower on mobile for performance */
+    }
+
+    .send-btn:hover:not(:disabled) {
+        transform: scale(1.05) rotate(5deg) !important;
+    }
+}

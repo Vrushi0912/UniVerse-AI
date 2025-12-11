@@ -1,0 +1,732 @@
+/*========================================
+  FUTURISTIC AI ENHANCEMENTS FOR UNIVERSE AI
+  Premium Next-Gen Interface Styling
+  ========================================*/
+
+/* ============================================
+   ANIMATED PARTICLE BACKGROUND
+   ============================================ */
+
+.ai-particles-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.ai-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.8), transparent);
+    border-radius: 50%;
+    animation: floatParticle 15s infinite ease-in-out;
+    filter: blur(1px);
+    box-shadow: 0 0 10px rgba(96, 165, 250, 0.6);
+}
+
+@keyframes floatParticle {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    50% {
+        transform: translate(var(--tx, 100px), var(--ty, -200px)) scale(1.5);
+        opacity: 0.8;
+    }
+
+    90% {
+        opacity: 0.3;
+    }
+}
+
+/* ============================================
+   GLASSMORPHISM BASE
+   ============================================ */
+
+body {
+    position: relative;
+    background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.15), transparent 50%),
+        radial-gradient(ellipse at bottom, rgba(139, 92, 246, 0.15), transparent 50%),
+        linear-gradient(135deg, #0a0a0a 0%, #050505 50%, #0a0a14 100%);
+}
+
+/* Enhanced Sidebar with Glassmorphism */
+.sidebar {
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(96, 165, 250, 0.1);
+    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 10;
+}
+
+.sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg,
+            rgba(37, 99, 235, 0.05) 0%,
+            transparent 50%,
+            rgba(139, 92, 246, 0.05) 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.sidebar>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   NEON GLOW ANIMATIONS
+   ============================================ */
+
+@keyframes neonPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 5px rgba(96, 165, 250, 0.4),
+            0 0 10px rgba(96, 165, 250, 0.3),
+            0 0 20px rgba(96, 165, 250, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 10px rgba(96, 165, 250, 0.6),
+            0 0 20px rgba(96, 165, 250, 0.5),
+            0 0 40px rgba(96, 165, 250, 0.3),
+            0 0 60px rgba(139, 92, 246, 0.2);
+    }
+}
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
+}
+
+/* ============================================
+   ENHANCED SIDEBAR NAVIGATION
+   ============================================ */
+
+.new-chat-btn {
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #60a5fa 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.new-chat-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent);
+    transition: left 0.5s;
+}
+
+.new-chat-btn:hover::before {
+    left: 100%;
+}
+
+.new-chat-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 30px rgba(37, 99, 235, 0.6),
+        0 0 40px rgba(96, 165, 250, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.new-chat-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Navigation Buttons with Neon Highlight */
+.nav-btn {
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.nav-btn::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 10px rgba(96, 165, 250, 0.8);
+}
+
+.nav-btn:hover::before,
+.nav-btn.active::before {
+    transform: translateX(0);
+}
+
+.nav-btn:hover {
+    background: rgba(37, 99, 235, 0.15);
+    color: #60a5fa;
+    transform: translateX(4px);
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+}
+
+.nav-btn span {
+    filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.5));
+    transition: transform 0.3s;
+}
+
+.nav-btn:hover span {
+    transform: scale(1.15) rotate(5deg);
+}
+
+/* ============================================
+   ENHANCED WELCOME SECTION
+   ============================================ */
+
+.welcome-content h1 {
+    background: linear-gradient(135deg,
+            #60a5fa 0%,
+            #3b82f6 25%,
+            #8b5cf6 50%,
+            #3b82f6 75%,
+            #60a5fa 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 4s ease infinite;
+    position: relative;
+    filter: drop-shadow(0 0 30px rgba(96, 165, 250, 0.4));
+    text-shadow: none;
+}
+
+.welcome-content h1::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background: linear-gradient(135deg, #60a5fa, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: blur(20px);
+    opacity: 0.5;
+}
+
+.welcome-screen::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.15), transparent 70%);
+    border-radius: 50%;
+    animation: aiPulse 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes aiPulse {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.6;
+    }
+}
+
+/* ============================================
+   GLASSMORPHISM FEATURE CARDS
+   ============================================ */
+
+.feature-item {
+    background: rgba(26, 26, 26, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(96, 165, 250, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-item::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            transparent 30%,
+            rgba(96, 165, 250, 0.1) 50%,
+            transparent 70%);
+    background-size: 200% 200%;
+    animation: shimmer 3s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.feature-item:hover::before {
+    opacity: 1;
+}
+
+.feature-item:hover {
+    background: rgba(37, 99, 235, 0.1);
+    border-color: #3b82f6;
+    box-shadow: 0 8px 32px rgba(37, 99, 235, 0.3),
+        0 0 40px rgba(96, 165, 250, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform: translateY(-8px) scale(1.02);
+}
+
+.feature-item span:first-child {
+    filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.6));
+    transition: all 0.3s;
+}
+
+.feature-item:hover span:first-child {
+    filter: drop-shadow(0 0 20px rgba(96, 165, 250, 0.9));
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Prompt Cards Enhancement */
+.prompt-card {
+    background: rgba(26, 26, 26, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(96, 165, 250, 0.15);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.prompt-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent,
+            #3b82f6,
+            #8b5cf6,
+            transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+}
+
+.prompt-card:hover::after {
+    transform: translateX(100%);
+}
+
+.prompt-card:hover {
+    background: rgba(37, 99, 235, 0.15);
+    border-color: #3b82f6;
+    box-shadow: 0 8px 32px rgba(37, 99, 235, 0.4),
+        0 0 40px rgba(96, 165, 250, 0.3);
+    transform: translateY(-4px) scale(1.02);
+}
+
+/* ============================================
+   FLOATING GLASS INPUT BAR
+   ============================================ */
+
+.input-area {
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(96, 165, 250, 0.2);
+    box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(37, 99, 235, 0.1);
+}
+
+.input-container {
+    position: relative;
+}
+
+.input-container::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 16px;
+    padding: 2px;
+    background: linear-gradient(135deg,
+            rgba(96, 165, 250, 0.3),
+            rgba(139, 92, 246, 0.3));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.input-container:focus-within::before {
+    opacity: 1;
+}
+
+.input-container textarea {
+    background: rgba(26, 26, 26, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-container textarea:focus {
+    background: rgba(26, 26, 26, 0.8);
+    border-color: #3b82f6;
+    box-shadow: 0 0 30px rgba(37, 99, 235, 0.4),
+        0 0 60px rgba(96, 165, 250, 0.2),
+        inset 0 2px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.01);
+}
+
+/* Enhanced Send Button */
+.send-btn {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.send-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.send-btn:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+.send-btn:hover:not(:disabled) {
+    transform: scale(1.05) rotate(5deg);
+    box-shadow: 0 8px 30px rgba(37, 99, 235, 0.6),
+        0 0 40px rgba(96, 165, 250, 0.5);
+    animation: neonPulse 2s ease-in-out infinite;
+}
+
+.send-btn span {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s;
+}
+
+.send-btn:hover span {
+    transform: translateY(-2px);
+}
+
+/* Voice & Attachment Buttons */
+.voice-btn,
+.attachment-btn,
+.photo-btn {
+    background: rgba(26, 26, 26, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.voice-btn::after,
+.attachment-btn::after,
+.photo-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.3), transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
+}
+
+.voice-btn:hover::after,
+.attachment-btn:hover::after,
+.photo-btn:hover::after {
+    width: 100px;
+    height: 100px;
+}
+
+.voice-btn:hover,
+.attachment-btn:hover,
+.photo-btn:hover {
+    background: rgba(37, 99, 235, 0.2);
+    border-color: #3b82f6;
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Microphone Pulse Animation */
+.voice-btn.recording {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    animation: micPulse 1s ease-in-out infinite;
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.6);
+}
+
+@keyframes micPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.6),
+            0 0 40px rgba(239, 68, 68, 0.3);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 30px rgba(239, 68, 68, 0.8),
+            0 0 60px rgba(239, 68, 68, 0.5);
+    }
+}
+
+/* ============================================
+   ENHANCED HEADER
+   ============================================ */
+
+.chat-header {
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(96, 165, 250, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3),
+        0 0 40px rgba(37, 99, 235, 0.05);
+}
+
+.header-btn {
+    background: rgba(26, 26, 26, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.header-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 6px;
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.2), rgba(139, 92, 246, 0.2));
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.header-btn:hover::before {
+    opacity: 1;
+}
+
+.header-btn:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   HISTORY ITEMS WITH 3D DEPTH
+   ============================================ */
+
+.history-item {
+    background: rgba(26, 26, 26, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(96, 165, 250, 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.history-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+    transform: scaleY(0);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 10px rgba(96, 165, 250, 0.8);
+}
+
+.history-item:hover::before,
+.history-item.active::before {
+    transform: scaleY(1);
+}
+
+.history-item:hover {
+    background: rgba(37, 99, 235, 0.15);
+    border-color: #3b82f6;
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transform: translateX(4px);
+}
+
+/* ============================================
+   RIPPLE CLICK EFFECT
+   ============================================ */
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(96, 165, 250, 0.5);
+    transform: scale(0);
+    animation: rippleEffect 0.6s ease-out;
+    pointer-events: none;
+}
+
+@keyframes rippleEffect {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   LOGO GLOW ENHANCEMENT
+   ============================================ */
+
+.logo-icon {
+    animation: logoGlow 3s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.6));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 20px rgba(96, 165, 250, 0.9)) drop-shadow(0 0 40px rgba(139, 92, 246, 0.5));
+    }
+}
+
+/* ============================================
+   MESSAGE CARDS ENHANCEMENT
+   ============================================ */
+
+.message-content {
+    background: rgba(26, 26, 26, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(96, 165, 250, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+}
+
+.message-content:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(96, 165, 250, 0.1);
+    border-color: rgba(96, 165, 250, 0.3);
+}
+
+.message.user .message-content {
+    background: rgba(37, 99, 235, 0.15);
+    border-color: rgba(96, 165, 250, 0.3);
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.2);
+}
+
+/* ============================================
+   RESPONSIVE ENHANCEMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+    .ai-particles-bg {
+        display: none;
+        /* Reduce mobile overhead */
+    }
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+
+.sidebar::-webkit-scrollbar,
+.chat-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track,
+.chat-container::-webkit-scrollbar-track {
+    background: rgba(26, 26, 26, 0.3);
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+.chat-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover,
+.chat-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #60a5fa, #a78bfa);
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.8);
+}
