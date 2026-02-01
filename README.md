@@ -3,7 +3,7 @@
 > **The Next Generation of AI-Powered Learning**  
 > *Advanced Educational Content Generator with Multi-LLM Intelligence & Futuristic Design*
 
-[![MCA Project](https://img.shields.io/badge/Project-MCA_Final_Year-blue?style=for-the-badge&logo=academic)](https://github.com/Vrushi0912/UniVerse-AI)
+[![MCA Project](https://img.shields.io/badge/Project-MCA_First_Year-blue?style=for-the-badge&logo=academic)](https://github.com/Vrushi0912/UniVerse-AI)
 [![Tech Stack](https://img.shields.io/badge/Stack-Flask_MongoDB_JS-teal?style=for-the-badge&logo=python)](https://github.com/Vrushi0912/UniVerse-AI)
 [![AI Powered](https://img.shields.io/badge/AI-Grok_%7C_Gemini-purple?style=for-the-badge&logo=openai)](https://github.com/Vrushi0912/UniVerse-AI)
 [![Status](https://img.shields.io/badge/Status-Active_Development-success?style=for-the-badge)](https://github.com/Vrushi0912/UniVerse-AI)
@@ -152,5 +152,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 <div align="center">
   <b>Developed with ❤️ by Vrushket Mulye</b><br>
-  <i>MCA Final Year Project 2025</i>
 </div>
