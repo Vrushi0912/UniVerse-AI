@@ -1,0 +1,22 @@
+services:
+  # The Web Service
+  - type: web
+    name: universe-ai
+    env: docker
+    plan: free
+    region: singapore # Closest to India for better speed
+    buildCommand: docker build -t universe-ai .
+    startCommand: uvicorn backend.app.api:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.18
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false # You will enter this in dashboard
+      - key: GROK_API_KEY
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ALLOWED_ORIGINS
+        value: "*"
