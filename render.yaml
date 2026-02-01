@@ -5,8 +5,7 @@ services:
     env: docker
     plan: free
     region: singapore # Closest to India for better speed
-    buildCommand: docker build -t universe-ai .
-    startCommand: uvicorn backend.app.api:app --host 0.0.0.0 --port $PORT
+
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.18
