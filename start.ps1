@@ -1,31 +1,20 @@
-# AI Educational Platform - Quick Start Script
+# AI Educational Platform - Startup Script
 
 Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "   AI Educational Platform" -ForegroundColor Green
+Write-Host "   UniVerse AI - Backend Server" -ForegroundColor Green
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 
-# Check if port 8000 is available
-$port = 8000
-$portInUse = Get-NetTCPConnection -LocalPort $port -ErrorAction SilentlyContinue
+# Start Uvicorn Server
+Write-Host "🚀 Starting FastAPI backend on http://localhost:8000..." -ForegroundColor Green
 
-if ($portInUse) {
-    Write-Host "⚠️  Port 8000 is already in use. Trying port 8080..." -ForegroundColor Yellow
-    $port = 8080
-}
+# Try 'python' first, fallback to 'py' if needed, or just use 'py' which is safer on Windows often
+# We will just use 'py' as it worked in tests
+# Open the frontend in the default browser
+Start-Process "$PSScriptRoot\frontend\index.html"
 
-Write-Host "🚀 Starting server on port $port..." -ForegroundColor Green
-Write-Host ""
-Write-Host "📱 Open your browser and go to:" -ForegroundColor Yellow
-Write-Host "   http://localhost:$port" -ForegroundColor Cyan
-Write-Host ""
-Write-Host "💡 Try these topics:" -ForegroundColor Yellow
-Write-Host "   - linked list" -ForegroundColor White
-Write-Host "   - binary tree" -ForegroundColor White
-Write-Host "   - quick sort" -ForegroundColor White
-Write-Host ""
-Write-Host "Press Ctrl+C to stop the server" -ForegroundColor Red
-Write-Host ""
+# Navigate to backend app directory
+Set-Location "$PSScriptRoot\backend\app"
 
-# Start the server
-python -m http.server $port
+# Start Uvicorn Server
+py -m uvicorn api:app --reload --host 0.0.0.0 --port 8000

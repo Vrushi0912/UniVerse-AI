@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#7c3aed">
+    <meta name="description" content="UniVerse AI - User Profile">
+    <title>My Profile - UniVerse AI</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/futuristic-enhancements.css">
+    <link rel="stylesheet" href="css/header-footer-enhancements.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="profile-header">
+        <button class="back-btn" onclick="window.location.href='chat.html'">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Back to Chat
+        </button>
+        <h1>My Profile</h1>
+        <button class="edit-btn" id="editProfileBtn" onclick="toggleEditMode()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+            </svg>
+            Edit
+        </button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="profile-container">
+        <!-- Profile Card -->
+        <section class="profile-card">
+            <div class="profile-banner" id="profileBanner">
+                <div class="banner-overlay"></div>
+                <button class="banner-edit-btn hidden" id="bannerEditBtn" onclick="changeBanner()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <path d="M21 15l-5-5L5 21" />
+                    </svg>
+                    Change Banner
+                </button>
+            </div>
+
+            <div class="profile-info">
+                <div class="avatar-section">
+                    <div class="avatar-container">
+                        <div class="avatar" id="userAvatar">
+                            <span class="avatar-text">U</span>
+                        </div>
+                        <button class="avatar-edit-btn hidden" id="avatarEditBtn" onclick="changeAvatar()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3" />
+                                <path d="M12 1v6m0 6v6" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="status-indicator online"></div>
+                </div>
+
+                <div class="user-details">
+                    <div class="display-mode" id="displayMode">
+                        <h2 class="user-name" id="userName">User Name</h2>
+                        <p class="user-email" id="userEmail">user@example.com</p>
+                        <p class="user-bio" id="userBio">AI enthusiast | Lifelong learner</p>
+                        <div class="user-meta">
+                            <span class="meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                    <circle cx="12" cy="7" r="4" />
+                                </svg>
+                                Member since: <span id="memberSince">Jan 2024</span>
+                            </span>
+                            <span class="meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                                <span id="subscriptionTier">Free Plan</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="edit-mode hidden" id="editMode">
+                        <div class="form-group">
+                            <label for="editName">Name</label>
+                            <input type="text" id="editName" placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="editBio">Bio</label>
+                            <textarea id="editBio" placeholder="Tell us about yourself" rows="3"></textarea>
+                        </div>
+                        <div class="edit-actions">
+                            <button class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
+                            <button class="btn btn-primary" onclick="saveProfile()">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Grid -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">💬</div>
+                <div class="stat-content">
+                    <h3 id="totalChats">0</h3>
+                    <p>Total Chats</p>
+                </div>
+                <div class="stat-trend up">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                        <polyline points="17 6 23 6 23 12" />
+                    </svg>
+                    <span>+12%</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <div class="stat-content">
+                    <h3 id="savedPrompts">0</h3>
+                    <p>Saved Items</p>
+                </div>
+                <div class="stat-trend up">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                        <polyline points="17 6 23 6 23 12" />
+                    </svg>
+                    <span>+8%</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">🔥</div>
+                <div class="stat-content">
+                    <h3 id="streakDays">0</h3>
+                    <p>Day Streak</p>
+                </div>
+                <div class="stat-trend neutral">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    <span>0%</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">⏱️</div>
+                <div class="stat-content">
+                    <h3 id="timeSpent">0h</h3>
+                    <p>Time Spent</p>
+                </div>
+                <div class="stat-trend up">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                        <polyline points="17 6 23 6 23 12" />
+                    </svg>
+                    <span>+15%</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity & Preferences -->
+        <div class="content-grid">
+            <!-- Recent Activity -->
+            <section class="activity-section">
+                <h2 class="section-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                    </svg>
+                    Recent Activity
+                </h2>
+                <div class="activity-list" id="activityList">
+                    <div class="activity-item">
+                        <div class="activity-icon">💬</div>
+                        <div class="activity-content">
+                            <p class="activity-title">Started a new chat about Python</p>
+                            <span class="activity-time">2 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">📚</div>
+                        <div class="activity-content">
+                            <p class="activity-title">Saved a prompt to library</p>
+                            <span class="activity-time">5 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">⭐</div>
+                        <div class="activity-content">
+                            <p class="activity-title">Favorited Machine Learning guide</p>
+                            <span class="activity-time">1 day ago</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Preferences -->
+            <section class="preferences-section">
+                <h2 class="section-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3" />
+                        <path
+                            d="M12 1v6m0 6v6M5.6 5.6l4.2 4.2m4.2 4.2l4.2 4.2M1 12h6m6 0h6M5.6 18.4l4.2-4.2m4.2-4.2l4.2-4.2" />
+                    </svg>
+                    Preferences
+                </h2>
+
+                <div class="preference-item">
+                    <div class="preference-label">
+                        <span>🎨 Theme</span>
+                        <p>Customize your interface appearance</p>
+                    </div>
+                    <select id="themeSelect" onchange="changeTheme()">
+                        <option value="blue-black">Blue & Black</option>
+                        <option value="purple-black">Purple & Black</option>
+                        <option value="green-black">Green & Black</option>
+                    </select>
+                </div>
+
+                <div class="preference-item">
+                    <div class="preference-label">
+                        <span>🤖 Default Model</span>
+                        <p>Choose your preferred AI model</p>
+                    </div>
+                    <select id="modelSelect">
+                        <option value="grok-4-latest">Grok 4 (Latest)</option>
+                        <option value="grok-3">Grok 3</option>
+                        <option value="grok-2">Grok 2</option>
+                    </select>
+                </div>
+
+                <div class="preference-item">
+                    <div class="preference-label">
+                        <span>🔔 Notifications</span>
+                        <p>Manage notification preferences</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="notificationsToggle" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="preference-item">
+                    <div class="preference-label">
+                        <span>🎤 Voice Input</span>
+                        <p>Enable voice-to-text input</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="voiceToggle" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="preference-item">
+                    <div class="preference-label">
+                        <span>💾 Auto-save Chats</span>
+                        <p>Automatically save conversations</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="autosaveToggle" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </section>
+        </div>
+
+        <!-- Achievements & Badges -->
+        <section class="achievements-section">
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="8" r="7" />
+                    <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12" />
+                </svg>
+                Achievements & Badges
+            </h2>
+            <div class="badges-grid" id="badgesGrid">
+                <div class="badge-card earned">
+                    <div class="badge-icon">🚀</div>
+                    <h3>First Steps</h3>
+                    <p>Started your first chat</p>
+                </div>
+                <div class="badge-card earned">
+                    <div class="badge-icon">💬</div>
+                    <h3>Conversationalist</h3>
+                    <p>10 chats completed</p>
+                </div>
+                <div class="badge-card">
+                    <div class="badge-icon">📚</div>
+                    <h3>Collector</h3>
+                    <p>Save 50 prompts</p>
+                    <div class="badge-progress">
+                        <div class="progress-bar" style="width: 30%"></div>
+                    </div>
+                </div>
+                <div class="badge-card">
+                    <div class="badge-icon">🔥</div>
+                    <h3>Streak Master</h3>
+                    <p>7-day active streak</p>
+                    <div class="badge-progress">
+                        <div class="progress-bar" style="width: 60%"></div>
+                    </div>
+                </div>
+                <div class="badge-card">
+                    <div class="badge-icon">⭐</div>
+                    <h3>Power User</h3>
+                    <p>100 chats completed</p>
+                    <div class="badge-progress">
+                        <div class="progress-bar" style="width: 15%"></div>
+                    </div>
+                </div>
+                <div class="badge-card">
+                    <div class="badge-icon">🎓</div>
+                    <h3>Scholar</h3>
+                    <p>Complete 20 learning sessions</p>
+                    <div class="badge-progress">
+                        <div class="progress-bar" style="width: 45%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Account Actions -->
+        <section class="actions-section">
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                Account Actions
+            </h2>
+            <div class="action-buttons">
+                <button class="action-btn" onclick="exportData()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    Export My Data
+                </button>
+                <button class="action-btn" onclick="changePassword()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    </svg>
+                    Change Password
+                </button>
+                <button class="action-btn danger" onclick="deleteAccount()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                    </svg>
+                    Delete Account
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="js/profile.js"></script>
+    <script src="js/theme-manager.js"></script>
+</body>
+
+</html>

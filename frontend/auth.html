@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - UniVerse AI</title>
+    <link rel="stylesheet" href="css/auth-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/dialog-styles.css">
+</head>
+
+<body>
+    <div class="auth-container">
+        <div class="auth-left">
+            <!-- Animated Background Elements -->
+            <div class="animated-bg-auth">
+                <div class="gradient-orb orb-1"></div>
+                <div class="gradient-orb orb-2"></div>
+            </div>
+
+            <div class="logo-section">
+                <div class="logo-large">
+                    <div class="logo-icon-wrapper">
+                        <span class="logo-icon">🌌</span>
+                    </div>
+                    <h1>UniVerse AI</h1>
+                </div>
+                <p class="tagline">Your Universal AI Assistant</p>
+            </div>
+
+            <div class="features-list">
+                <div class="feature active">
+                    <div class="feature-icon">✨</div>
+                    <div class="feature-content">
+                        <h3>Chat with AI</h3>
+                        <p>Powered by multiple advanced AI models</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💻</div>
+                    <div class="feature-content">
+                        <h3>Generate Code</h3>
+                        <p>Get syntax-highlighted code in any language</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎓</div>
+                    <div class="feature-content">
+                        <h3>Learn Interactively</h3>
+                        <p>AI teacher with audio explanations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="auth-right">
+            <a href="index.html" class="back-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5"></path>
+                    <path d="M12 19l-7-7 7-7"></path>
+                </svg>
+                Back to Home
+            </a>
+
+            <!-- Login Form -->
+            <div class="auth-form" id="loginForm">
+                <div class="form-header">
+                    <h2>Welcome Back</h2>
+                    <p class="subtitle">Sign in to continue to UniVerse AI</p>
+                </div>
+
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="loginEmail" required placeholder="your@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="loginPassword" required placeholder="Enter your password">
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox">
+                            <input type="checkbox" id="rememberMe">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-password">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Sign In</button>
+                </form>
+
+                <div class="divider">
+                    <span>or</span>
+                </div>
+
+                <button class="btn-google" onclick="loginWithGoogle()">
+                    <svg width="18" height="18" viewBox="0 0 18 18">
+                        <path fill="#4285F4"
+                            d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z">
+                        </path>
+                        <path fill="#34A853"
+                            d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 0 1-7.18-2.54H1.83v2.07A8 8 0 0 0 8.98 17z">
+                        </path>
+                        <path fill="#FBBC05" d="M4.5 10.52a4.8 4.8 0 0 1 0-3.04V5.41H1.83a8 8 0 0 0 0 7.18l2.67-2.07z">
+                        </path>
+                        <path fill="#EA4335"
+                            d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.49a4.77 4.77 0 0 1 4.48-3.3z">
+                        </path>
+                    </svg>
+                    Continue with Google
+                </button>
+
+                <div class="switch-form">
+                    Don't have an account? <a href="#" onclick="showSignup()">Sign up</a>
+                </div>
+
+                <div class="guest-option">
+                    <button class="btn-guest" onclick="continueAsGuest()">
+                        <span>🎁</span> Continue as Guest (5 free prompts)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Signup Form -->
+            <div class="auth-form hidden" id="signupForm">
+                <h2>Create Account</h2>
+                <p class="subtitle">Join UniVerse AI today</p>
+
+                <form onsubmit="handleSignup(event)">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="signupName" required placeholder="Enter your name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="signupEmail" required placeholder="your@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="signupPassword" required placeholder="Create a password"
+                            minlength="6">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" id="signupPasswordConfirm" required placeholder="Confirm your password">
+                    </div>
+
+                    <label class="checkbox">
+                        <input type="checkbox" required>
+                        <span>I agree to the <a href="terms.html" target="_blank">Terms of Service</a> and <a
+                                href="privacy.html" target="_blank">Privacy Policy</a></span>
+                    </label>
+
+                    <button type="submit" class="btn-primary">Create Account</button>
+                </form>
+
+                <div class="divider">
+                    <span>or</span>
+                </div>
+
+                <button class="btn-google" onclick="loginWithGoogle()">
+                    <svg width="18" height="18" viewBox="0 0 18 18">
+                        <path fill="#4285F4"
+                            d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z">
+                        </path>
+                        <path fill="#34A853"
+                            d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 0 1-7.18-2.54H1.83v2.07A8 8 0 0 0 8.98 17z">
+                        </path>
+                        <path fill="#FBBC05" d="M4.5 10.52a4.8 4.8 0 0 1 0-3.04V5.41H1.83a8 8 0 0 0 0 7.18l2.67-2.07z">
+                        </path>
+                        <path fill="#EA4335"
+                            d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.49a4.77 4.77 0 0 1 4.48-3.3z">
+                        </path>
+                    </svg>
+                    Sign up with Google
+                </button>
+
+                <div class="switch-form">
+                    Already have an account? <a href="#" onclick="showLogin()">Sign in</a>
+                </div>
+
+                <div class="guest-option">
+                    <button class="btn-guest" onclick="continueAsGuest()">
+                        <span>🎁</span> Continue as Guest (5 free prompts)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="js/auth-script.js"></script>
+    <script src="js/dialog-system.js"></script>
+</body>
+
+</html>

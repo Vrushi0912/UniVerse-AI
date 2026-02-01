@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#7c3aed">
+    <meta name="description" content="UniVerse AI - Project Management">
+    <title>Projects - UniVerse AI</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/projects.css">
+    <link rel="stylesheet" href="css/futuristic-enhancements.css">
+    <link rel="stylesheet" href="css/header-footer-enhancements.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="projects-header">
+        <div class="header-left">
+            <button class="back-btn" onclick="window.location.href='chat.html'">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+                Back
+            </button>
+            <h1>Projects</h1>
+        </div>
+        <div class="header-actions">
+            <div class="view-toggle">
+                <button class="view-btn active" data-view="grid" onclick="switchView('grid')" title="Grid View">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7" />
+                        <rect x="14" y="3" width="7" height="7" />
+                        <rect x="14" y="14" width="7" height="7" />
+                        <rect x="3" y="14" width="7" height="7" />
+                    </svg>
+                </button>
+                <button class="view-btn" data-view="list" onclick="switchView('list')" title="List View">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="8" y1="6" x2="21" y2="6" />
+                        <line x1="8" y1="12" x2="21" y2="12" />
+                        <line x1="8" y1="18" x2="21" y2="18" />
+                        <line x1="3" y1="6" x2="3.01" y2="6" />
+                        <line x1="3" y1="12" x2="3.01" y2="12" />
+                        <line x1="3" y1="18" x2="3.01" y2="18" />
+                    </svg>
+                </button>
+                <button class="view-btn" data-view="kanban" onclick="switchView('kanban')" title="Kanban View">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="6" height="18" />
+                        <rect x="11" y="3" width="6" height="12" />
+                        <rect x="19" y="3" width="2" height="8" />
+                    </svg>
+                </button>
+            </div>
+            <button class="new-project-btn" onclick="openNewProjectModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                New Project
+            </button>
+        </div>
+    </header>
+
+    <!-- Search & Filter Bar -->
+    <div class="search-bar">
+        <div class="search-input-container">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+            </svg>
+            <input type="text" id="projectSearch" placeholder="Search projects..." onkeyup="searchProjects()">
+        </div>
+        <select id="statusFilter" onchange="filterProjects()">
+            <option value="all">All Status</option>
+            <option value="planning">Planning</option>
+            <option value="in-progress">In Progress</option>
+            <option value="completed">Completed</option>
+            <option value="on-hold">On Hold</option>
+        </select>
+        <select id="sortBy" onchange="sortProjects()">
+            <option value="recent">Most Recent</option>
+            <option value="oldest">Oldest First</option>
+            <option value="name">Name (A-Z)</option>
+            <option value="priority">Priority</option>
+        </select>
+    </div>
+
+    <!-- Stats Overview -->
+    <div class="stats-overview">
+        <div class="stat-item">
+            <div class="stat-icon">📁</div>
+            <div class="stat-details">
+                <h3 id="totalProjects">0</h3>
+                <p>Total Projects</p>
+            </div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">🚀</div>
+            <div class="stat-details">
+                <h3 id="activeProjects">0</h3>
+                <p>In Progress</p>
+            </div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">✅</div>
+            <div class="stat-details">
+                <h3 id="completedProjects">0</h3>
+                <p>Completed</p>
+            </div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">⏸️</div>
+            <div class="stat-details">
+                <h3 id="onHoldProjects">0</h3>
+                <p>On Hold</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="projects-container">
+        <!-- Grid View -->
+        <div id="gridView" class="projects-grid active-view">
+            <!-- Projects will be populated here -->
+        </div>
+
+        <!-- List View -->
+        <div id="listView" class="projects-list">
+            <!-- Projects will be populated here -->
+        </div>
+
+        <!-- Kanban View -->
+        <div id="kanbanView" class="kanban-board">
+            <div class="kanban-column" data-status="planning">
+                <div class="column-header">
+                    <h3>📋 Planning</h3>
+                    <span class="count" id="planningCount">0</span>
+                </div>
+                <div class="column-content" id="planningColumn"></div>
+            </div>
+            <div class="kanban-column" data-status="in-progress">
+                <div class="column-header">
+                    <h3>🚀 In Progress</h3>
+                    <span class="count" id="inProgressCount">0</span>
+                </div>
+                <div class="column-content" id="inProgressColumn"></div>
+            </div>
+            <div class="kanban-column" data-status="completed">
+                <div class="column-header">
+                    <h3>✅ Completed</h3>
+                    <span class="count" id="completedCount">0</span>
+                </div>
+                <div class="column-content" id="completedColumn"></div>
+            </div>
+            <div class="kanban-column" data-status="on-hold">
+                <div class="column-header">
+                    <h3>⏸️ On Hold</h3>
+                    <span class="count" id="onHoldCount">0</span>
+                </div>
+                <div class="column-content" id="onHoldColumn"></div>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-state hidden">
+            <div class="empty-icon">📁</div>
+            <h2>No Projects Yet</h2>
+            <p>Create your first project to get started with organizing your AI-generated code and assets</p>
+            <button class="primary-btn" onclick="openNewProjectModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                Create First Project
+            </button>
+        </div>
+    </main>
+
+    <!-- New Project Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2 id="modalTitle">New Project</h2>
+                <button class="close-btn" onclick="closeProjectModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="projectForm" onsubmit="saveProject(event)">
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="projectName">Project Name *</label>
+                            <input type="text" id="projectName" required placeholder="e.g., E-commerce Website">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="projectStatus">Status</label>
+                            <select id="projectStatus">
+                                <option value="planning">Planning</option>
+                                <option value="in-progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                                <option value="on-hold">On Hold</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectPriority">Priority</label>
+                            <select id="projectPriority">
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                                <option value="urgent">Urgent</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectDescription">Description</label>
+                        <textarea id="projectDescription" rows="4"
+                            placeholder="Brief description of your project..."></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="projectTechnology">Technology Stack</label>
+                            <input type="text" id="projectTechnology" placeholder="e.g., React, Node.js, MongoDB">
+                        </div>
+                        <div class="form-group">
+                            <label for="projectDeadline">Deadline</label>
+                            <input type="date" id="projectDeadline">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectTags">Tags (comma-separated)</label>
+                        <input type="text" id="projectTags" placeholder="e.g., web, AI, automation">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectNotes">Notes</label>
+                        <textarea id="projectNotes" rows="3"
+                            placeholder="Additional notes or requirements..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="secondary-btn" onclick="closeProjectModal()">Cancel</button>
+                        <button type="submit" class="primary-btn">
+                            <span id="saveButtonText">Create Project</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Details Modal -->
+    <div class="modal" id="detailsModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2 id="detailsTitle">Project Details</h2>
+                <button class="close-btn" onclick="closeDetailsModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div id="projectDetails"></div>
+                <div class="details-actions">
+                    <button class="secondary-btn" onclick="closeDetailsModal()">Close</button>
+                    <button class="primary-btn" onclick="editCurrentProject()">Edit Project</button>
+                    <button class="danger-btn" onclick="deleteCurrentProject()">Delete Project</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="js/projects.js"></script>
+    <script src="js/theme-manager.js"></script>
+</body>
+
+</html>

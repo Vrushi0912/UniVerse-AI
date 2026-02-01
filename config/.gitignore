@@ -1,0 +1,90 @@
+# UniVerse AI - Git Ignore File
+
+# Environment variables (NEVER COMMIT)
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Database
+*.sqlite
+*.db
+
+# API Keys (backup check)
+*api_key*
+*secret*
+*credential*
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.cache
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Node modules (if you add Node.js later)
+node_modules/
+package-lock.json
+
+# Build outputs
+*.min.js
+*.min.css
+dist/
+build/
+
+# Personal notes
+TODO.md
+NOTES.md
+scratch.txt
+
+# Backup files
+*.backup
+*.old
+
+# MongoDB local data
+data/
+mongodb/

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dialog System Test - UniVerse AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="dialog-styles.css">
+    <style>
+        body {
+            background-color: #0f0f13;
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        h1 {
+            margin-bottom: 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        button {
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(6, 182, 212, 0.5);
+        }
+
+        .section-title {
+            grid-column: 1 / -1;
+            margin-top: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+            color: #06b6d4;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Dialog System Verification</h1>
+
+    <div class="grid">
+        <h3 class="section-title">Critical / Destructive</h3>
+        <button onclick="DialogSystem.show('delete_general', logConfirm, logCancel)">Delete General</button>
+        <button onclick="DialogSystem.show('delete_post', logConfirm, logCancel)">Delete Post</button>
+        <button onclick="DialogSystem.show('delete_file', logConfirm, logCancel)">Delete File</button>
+        <button onclick="DialogSystem.show('logout', logConfirm, logCancel)">Logout</button>
+
+        <h3 class="section-title">Success States</h3>
+        <button onclick="DialogSystem.show('form_success')">Form Success</button>
+        <button onclick="DialogSystem.show('save_success')">Save Success</button>
+        <button onclick="DialogSystem.show('upload_success')">Upload Success</button>
+        <button onclick="DialogSystem.show('payment_success')">Payment Success</button>
+        <button onclick="DialogSystem.show('newsletter_success')">Newsletter Success</button>
+        <button onclick="DialogSystem.show('conversation_saved', logConfirm, logCancel)">Conversation Saved</button>
+
+        <h3 class="section-title">Errors / Warnings</h3>
+        <button onclick="DialogSystem.show('form_failed')">Form Failed</button>
+        <button onclick="DialogSystem.show('no_internet')">No Internet</button>
+        <button onclick="DialogSystem.show('server_error')">Server Error</button>
+        <button onclick="DialogSystem.show('not_found')">404 Not Found</button>
+        <button onclick="DialogSystem.show('unauthorized')">Unauthorized</button>
+        <button onclick="DialogSystem.show('permission_req')">Permission Req</button>
+        <button onclick="DialogSystem.show('invalid_input')">Invalid Input</button>
+        <button onclick="DialogSystem.show('upload_failed')">Upload Failed</button>
+        <button onclick="DialogSystem.show('payment_failed')">Payment Failed</button>
+        <button onclick="DialogSystem.show('newsletter_failed')">Newsletter Failed</button>
+
+        <h3 class="section-title">Interactive / Workflow</h3>
+        <button onclick="DialogSystem.show('exit_unsaved', logConfirm, logCancel)">Exit Unsaved</button>
+        <button onclick="DialogSystem.show('save_confirm', logConfirm, logCancel)">Save Confirm</button>
+        <button onclick="DialogSystem.show('unsaved_warning', logConfirm, logCancel)">Unsaved Warning</button>
+        <button onclick="DialogSystem.show('loading'); setTimeout(() => DialogSystem.hide(), 2000)">Loading
+            (2s)</button>
+    </div>
+
+    <script src="dialog-system.js"></script>
+    <script>
+        function logConfirm() { console.log('Confirmed!'); alert('Callback: Confirmed!'); }
+        function logCancel() { console.log('Cancelled!'); alert('Callback: Cancelled!'); }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniVerse AI - Database Design</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #2980b9;
+            margin-top: 40px;
+            border-left: 5px solid #3498db;
+            padding-left: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .data-type {
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: #e74c3c;
+            background-color: #fdf2f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .collection-name {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>UniVerse AI - Database Schema Design</h1>
+
+    <div class="collection-section">
+        <h2>1. Users Collection</h2>
+        <div class="collection-name">Collection: users</div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%">Field Name</th>
+                    <th style="width: 25%">Data Type</th>
+                    <th style="width: 50%">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>_id</td>
+                    <td><span class="data-type">ObjectId</span></td>
+                    <td>Primary key (auto-generated)</td>
+                </tr>
+                <tr>
+                    <td>email</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>User email (unique, indexed)</td>
+                </tr>
+                <tr>
+                    <td>password_hash</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>BCrypt hashed password</td>
+                </tr>
+                <tr>
+                    <td>full_name</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>User's full name</td>
+                </tr>
+                <tr>
+                    <td>subscription_tier</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>free, pro, business</td>
+                </tr>
+                <tr>
+                    <td>is_active</td>
+                    <td><span class="data-type">Boolean</span></td>
+                    <td>Account status</td>
+                </tr>
+                <tr>
+                    <td>preferences</td>
+                    <td><span class="data-type">Object</span></td>
+                    <td>Embedded user preferences</td>
+                </tr>
+                <tr>
+                    <td>oauth_provider</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>OAuth provider (google), if applicable</td>
+                </tr>
+                <tr>
+                    <td>created_at</td>
+                    <td><span class="data-type">DateTime</span></td>
+                    <td>Account creation timestamp</td>
+                </tr>
+                <tr>
+                    <td>last_login</td>
+                    <td><span class="data-type">DateTime</span></td>
+                    <td>Last login timestamp</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="collection-section">
+        <h2>2. Chat History Collection</h2>
+        <div class="collection-name">Collection: chat_history</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Field Name</th>
+                    <th>Data Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>_id</td>
+                    <td><span class="data-type">ObjectId</span></td>
+                    <td>Primary key</td>
+                </tr>
+                <tr>
+                    <td>user_id</td>
+                    <td><span class="data-type">ObjectId</span></td>
+                    <td>Reference to users collection</td>
+                </tr>
+                <tr>
+                    <td>session_id</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>Unique session identifier</td>
+                </tr>
+                <tr>
+                    <td>title</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>Chat title</td>
+                </tr>
+                <tr>
+                    <td>model_used</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>Main model used for session</td>
+                </tr>
+                <tr>
+                    <td>messages</td>
+                    <td><span class="data-type">Array</span></td>
+                    <td>List of message objects</td>
+                </tr>
+                <tr>
+                    <td>messages.role</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>user or assistant</td>
+                </tr>
+                <tr>
+                    <td>messages.content</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>Message text content</td>
+                </tr>
+                <tr>
+                    <td>messages.timestamp</td>
+                    <td><span class="data-type">DateTime</span></td>
+                    <td>Message timestamp</td>
+                </tr>
+                <tr>
+                    <td>messages.tokens_used</td>
+                    <td><span class="data-type">Integer</span></td>
+                    <td>Token usage per message</td>
+                </tr>
+                <tr>
+                    <td>total_tokens</td>
+                    <td><span class="data-type">Integer</span></td>
+                    <td>Total tokens used in session</td>
+                </tr>
+                <tr>
+                    <td>is_archived</td>
+                    <td><span class="data-type">Boolean</span></td>
+                    <td>Archive status</td>
+                </tr>
+                <tr>
+                    <td>created_at</td>
+                    <td><span class="data-type">DateTime</span></td>
+                    <td>Session creation time</td>
+                </tr>
+                <tr>
+                    <td>updated_at</td>
+                    <td><span class="data-type">DateTime</span></td>
+                    <td>Last update time</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="collection-section">
+        <h2>3. Educational Content Collection</h2>
+        <div class="collection-name">Collection: educational_content</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Field Name</th>
+                    <th>Data Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>_id</td>
+                    <td><span class="data-type">ObjectId</span></td>
+                    <td>Primary key</td>
+                </tr>
+                <tr>
+                    <td>user_id</td>
+                    <td><span class="data-type">ObjectId</span></td>
+                    <td>Reference to users collection</td>
+                </tr>
+                <tr>
+                    <td>topic</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>Content topic/title</td>
+                </tr>
+                <tr>
+                    <td>content</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>Generated textual content</td>
+                </tr>
+                <tr>
+                    <td>diagram_data</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>Mermaid diagram definition</td>
+                </tr>
+                <tr>
+                    <td>audio_script</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>Text-to-speech script</td>
+                </tr>
+                <tr>
+                    <td>rating</td>
+                    <td><span class="data-type">Integer</span></td>
+                    <td>User rating (1-5)</td>
+                </tr>
+                <tr>
+                    <td>is_favorite</td>
+                    <td><span class="data-type">Boolean</span></td>
+                    <td>Favorite status</td>
+                </tr>
+                <tr>
+                    <td>tags</td>
+                    <td><span class="data-type">Array[String]</span></td>
+                    <td>Organization tags</td>
+                </tr>
+                <tr>
+                    <td>created_at</td>
+                    <td><span class="data-type">DateTime</span></td>
+                    <td>Creation timestamp</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="collection-section">
+        <h2>4. Saved Prompts Collection</h2>
+        <div class="collection-name">Collection: saved_prompts</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Field Name</th>
+                    <th>Data Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>_id</td>
+                    <td><span class="data-type">ObjectId</span></td>
+                    <td>Primary key</td>
+                </tr>
+                <tr>
+                    <td>user_id</td>
+                    <td><span class="data-type">ObjectId</span></td>
+                    <td>Reference to users collection</td>
+                </tr>
+                <tr>
+                    <td>title</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>Prompt title</td>
+                </tr>
+                <tr>
+                    <td>content</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>Prompt text content</td>
+                </tr>
+                <tr>
+                    <td>description</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>Optional description</td>
+                </tr>
+                <tr>
+                    <td>category</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>Category (default: general)</td>
+                </tr>
+                <tr>
+                    <td>tags</td>
+                    <td><span class="data-type">Array[String]</span></td>
+                    <td>Searchable tags</td>
+                </tr>
+                <tr>
+                    <td>is_favorite</td>
+                    <td><span class="data-type">Boolean</span></td>
+                    <td>Favorite status</td>
+                </tr>
+                <tr>
+                    <td>is_public</td>
+                    <td><span class="data-type">Boolean</span></td>
+                    <td>Public visibility flag</td>
+                </tr>
+                <tr>
+                    <td>model_preference</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>Preferred AI model</td>
+                </tr>
+                <tr>
+                    <td>temperature</td>
+                    <td><span class="data-type">Float</span></td>
+                    <td>Generation temperature (0.0-2.0)</td>
+                </tr>
+                <tr>
+                    <td>usage_count</td>
+                    <td><span class="data-type">Integer</span></td>
+                    <td>Usage counter</td>
+                </tr>
+                <tr>
+                    <td>created_at</td>
+                    <td><span class="data-type">DateTime</span></td>
+                    <td>Creation timestamp</td>
+                </tr>
+                <tr>
+                    <td>updated_at</td>
+                    <td><span class="data-type">DateTime</span></td>
+                    <td>Last update timestamp</td>
+                </tr>
+                <tr>
+                    <td>last_used_at</td>
+                    <td><span class="data-type">DateTime</span></td>
+                    <td>Last usage timestamp</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="collection-section">
+        <h2>5. User Preferences Collection</h2>
+        <div class="collection-name">Collection: user_preferences</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Field Name</th>
+                    <th>Data Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>_id</td>
+                    <td><span class="data-type">ObjectId</span></td>
+                    <td>Primary key</td>
+                </tr>
+                <tr>
+                    <td>user_id</td>
+                    <td><span class="data-type">ObjectId</span></td>
+                    <td>Reference to users (unique)</td>
+                </tr>
+                <tr>
+                    <td>api_keys</td>
+                    <td><span class="data-type">Object</span></td>
+                    <td>Encrypted API key configuration</td>
+                </tr>
+                <tr>
+                    <td>theme</td>
+                    <td><span class="data-type">Object</span></td>
+                    <td>Theme settings</td>
+                </tr>
+                <tr>
+                    <td>theme.mode</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>light, dark, auto</td>
+                </tr>
+                <tr>
+                    <td>theme.primary_color</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>UI accent color</td>
+                </tr>
+                <tr>
+                    <td>model</td>
+                    <td><span class="data-type">Object</span></td>
+                    <td>Model default settings</td>
+                </tr>
+                <tr>
+                    <td>model.default_model</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>Default model ID</td>
+                </tr>
+                <tr>
+                    <td>ui</td>
+                    <td><span class="data-type">Object</span></td>
+                    <td>UI behavior settings</td>
+                </tr>
+                <tr>
+                    <td>ui.compact_mode</td>
+                    <td><span class="data-type">Boolean</span></td>
+                    <td>Compact layout flag</td>
+                </tr>
+                <tr>
+                    <td>ui.language</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>Interface language (e.g., en)</td>
+                </tr>
+                <tr>
+                    <td>custom_settings</td>
+                    <td><span class="data-type">Object</span></td>
+                    <td>Flexible custom settings</td>
+                </tr>
+                <tr>
+                    <td>created_at</td>
+                    <td><span class="data-type">DateTime</span></td>
+                    <td>Creation timestamp</td>
+                </tr>
+                <tr>
+                    <td>updated_at</td>
+                    <td><span class="data-type">DateTime</span></td>
+                    <td>Last update timestamp</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="collection-section">
+        <h2>6. Sessions Collection</h2>
+        <div class="collection-name">Collection: sessions</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Field Name</th>
+                    <th>Data Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>_id</td>
+                    <td><span class="data-type">ObjectId</span></td>
+                    <td>Primary key</td>
+                </tr>
+                <tr>
+                    <td>user_id</td>
+                    <td><span class="data-type">ObjectId</span></td>
+                    <td>Reference to users</td>
+                </tr>
+                <tr>
+                    <td>session_token</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>JWT token or Session ID</td>
+                </tr>
+                <tr>
+                    <td>expires_at</td>
+                    <td><span class="data-type">DateTime</span></td>
+                    <td>Expiration timestamp</td>
+                </tr>
+                <tr>
+                    <td>is_active</td>
+                    <td><span class="data-type">Boolean</span></td>
+                    <td>Active status</td>
+                </tr>
+                <tr>
+                    <td>ip_address</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>Client IP address</td>
+                </tr>
+                <tr>
+                    <td>device_info</td>
+                    <td><span class="data-type">String</span></td>
+                    <td>User agent / Device info</td>
+                </tr>
+                <tr>
+                    <td>created_at</td>
+                    <td><span class="data-type">DateTime</span></td>
+                    <td>Creation timestamp</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>

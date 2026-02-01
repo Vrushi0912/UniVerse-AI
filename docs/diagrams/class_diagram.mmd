@@ -1,0 +1,37 @@
+classDiagram
+    class BaseAgent {
+        +String name
+        +__init__(name)
+        +__call__()
+    }
+
+    class MCGAgent {
+        -String api_key
+        +__call__(prompt)
+        +_call_gemini()
+        +_parse_sections()
+    }
+
+    class VCAgent {
+        +__call__(data)
+        +generate_mermaid()
+    }
+
+    class AGAagent {
+        +__call__(data)
+        +generate_ssml()
+    }
+
+    class MasterOrchestrator {
+        -dict agents
+        +run(prompt)
+        +coordinate()
+    }
+
+    BaseAgent <|-- MCGAgent : inherits
+    BaseAgent <|-- VCAgent : inherits
+    BaseAgent <|-- AGAagent : inherits
+    
+    MasterOrchestrator ..> MCGAgent : uses
+    MasterOrchestrator ..> VCAgent : uses
+    MasterOrchestrator ..> AGAagent : uses

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#7c3aed">
+    <meta name="description" content="UniVerse AI - Feature Demo and Testing">
+    <title>UniVerse AI - Feature Showcase</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dialog-styles.css">
+
+    <style>
+        .demo-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .demo-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .demo-section h2 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .demo-section p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .demo-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .demo-btn {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-purple) 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+        }
+
+        .demo-btn.secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .feature-item {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.2);
+        }
+
+        .feature-item h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .feature-item p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        .shortcut-badge {
+            display: inline-block;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: monospace;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">🌌</span>
+                <span class="logo-text">UniVerse AI - Demo</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="chat.html">Chat AI</a></li>
+                <li><a href="#" onclick="event.preventDefault(); showAnalytics();" title="View Analytics">📊</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="demo-container">
+        <header style="text-align: center; margin-bottom: 3rem;">
+            <h1
+                style="font-size: 2.5rem; margin-bottom: 1rem; background: linear-gradient(135deg, #3b82f6 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                ✨ Feature Showcase & Demo
+            </h1>
+            <p style="font-size: 1.1rem; color: var(--text-secondary);">
+                Explore all the new premium features added to UniVerse AI
+            </p>
+        </header>
+
+        <!-- Theme Toggle Demo -->
+        <div class="demo-section">
+            <h2>🌓 Dark/Light Mode Toggle</h2>
+            <p>Switch between beautiful dark and light themes with smooth transitions. Your preference is saved
+                automatically.</p>
+            <div class="demo-buttons">
+                <button class="demo-btn" onclick="window.ThemeManager?.toggleTheme()">
+                    Toggle Theme Now
+                </button>
+                <button class="demo-btn secondary"
+                    onclick="localStorage.removeItem('universe-theme'); location.reload()">
+                    Reset to System Default
+                </button>
+            </div>
+        </div>
+
+        <!-- Command Palette Demo -->
+        <div class="demo-section">
+            <h2>⌨️ Command Palette <span class="shortcut-badge">Ctrl/Cmd + K</span></h2>
+            <p>Lightning-fast access to any feature with fuzzy search and keyboard navigation.</p>
+            <div class="demo-buttons">
+                <button class="demo-btn" onclick="commandPalette?.open()">
+                    Open Command Palette
+                </button>
+                <button class="demo-btn secondary"
+                    onclick="alert('Shortcuts:\n• Ctrl/Cmd+K: Open palette\n• Arrow keys: Navigate\n• Enter: Execute\n• Esc: Close')">
+                    View Shortcuts
+                </button>
+            </div>
+        </div>
+
+        <!-- Analytics Dashboard Demo -->
+        <div class="demo-section">
+            <h2>📊 Analytics Dashboard</h2>
+            <p>Track your usage patterns with beautiful visual charts. All data stored locally for privacy.</p>
+            <div class="demo-buttons">
+                <button class="demo-btn" onclick="showAnalytics()">
+                    Open Analytics
+                </button>
+                <button class="demo-btn secondary" onclick="simulateUsage()">
+                    Simulate Usage Data
+                </button>
+                <button class="demo-btn secondary" onclick="analytics?.exportData()">
+                    Export Data
+                </button>
+            </div>
+        </div>
+
+        <!-- Notifications Demo -->
+        <div class="demo-section">
+            <h2>🔔 Enhanced Notifications</h2>
+            <p>Beautiful toast notifications with multiple types and smooth animations.</p>
+            <div class="demo-buttons">
+                <button class="demo-btn" onclick="notify.success('Operation completed successfully! 🎉')">
+                    Show Success
+                </button>
+                <button class="demo-btn" onclick="notify.error('An error occurred. Please try again.')">
+                    Show Error
+                </button>
+                <button class="demo-btn" onclick="notify.warning('Your API key will expire soon.')">
+                    Show Warning
+                </button>
+                <button class="demo-btn" onclick="notify.info('New features are available!')">
+                    Show Info
+                </button>
+                <button class="demo-btn" onclick="notify.loading('Processing your request...')">
+                    Show Loading
+                </button>
+                <button class="demo-btn secondary" onclick="notify.clearAll()">
+                    Clear All
+                </button>
+            </div>
+        </div>
+
+        <!-- PWA Demo -->
+        <div class="demo-section">
+            <h2>📱 Progressive Web App (PWA)</h2>
+            <p>Install UniVerse AI as a standalone app for native-like experience and offline access.</p>
+            <div class="demo-buttons">
+                <button class="demo-btn" onclick="checkPWAStatus()">
+                    Check PWA Status
+                </button>
+                <button class="demo-btn secondary" onclick="showPWAInfo()">
+                    Learn More
+                </button>
+            </div>
+        </div>
+
+        <!-- FAB Demo -->
+        <div class="demo-section">
+            <h2>⚡ Floating Action Button</h2>
+            <p>Quick access menu in the bottom-right corner. Try clicking the colorful circle!</p>
+            <div class="demo-buttons">
+                <button class="demo-btn" onclick="fab?.open()">
+                    Open FAB Menu
+                </button>
+                <button class="demo-btn secondary" onclick="fab?.close()">
+                    Close FAB Menu
+                </button>
+            </div>
+        </div>
+
+        <!-- Feature Summary -->
+        <div class="demo-section">
+            <h2>🎯 All Features at a Glance</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h3>🌓 Theme Toggle</h3>
+                    <p>Beautiful dark/light modes with smooth transitions</p>
+                </div>
+                <div class="feature-item">
+                    <h3>⌨️ Quick Commands</h3>
+                    <p>Ctrl+K for instant navigation</p>
+                </div>
+                <div class="feature-item">
+                    <h3>📊 Analytics</h3>
+                    <p>Track usage with visual charts</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🔔 Notifications</h3>
+                    <p>Toast messages with animations</p>
+                </div>
+                <div class="feature-item">
+                    <h3>📱 PWA Support</h3>
+                    <p>Install as native app</p>
+                </div>
+                <div class="feature-item">
+                    <h3>⚡ FAB Menu</h3>
+                    <p>Quick access to key features</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 UniVerse AI - Feature Demo</p>
+            <p style="margin-top: 0.5rem;">All features are production-ready and fully functional! ✨</p>
+        </div>
+    </footer>
+
+    <!-- Core Scripts -->
+    <script src="js/dialog-system.js"></script>
+
+    <!-- Enhancement Scripts -->
+    <script src="js/theme-manager.js"></script>
+    <script src="js/command-palette.js"></script>
+    <script src="js/notification-system.js"></script>
+    <script src="js/analytics-dashboard.js"></script>
+    <script src="js/floating-action-button.js"></script>
+    <script src="js/pwa-register.js"></script>
+
+    <script>
+        // Demo helper functions
+        function simulateUsage() {
+            // Simulate some usage data for demo
+            for (let i = 0; i < 10; i++) {
+                analytics?.trackChatCreated();
+                analytics?.trackMessageSent('gemini-pro');
+            }
+            analytics?.trackMessageSent('gemini-1.5-flash');
+            analytics?.trackMessageSent('gemini-1.5-flash');
+
+            notify.success('Simulated 10 chats and 12 messages! Check analytics now.');
+        }
+
+        function checkPWAStatus() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistration().then(registration => {
+                    if (registration) {
+                        notify.success('PWA is active! Service Worker registered successfully.');
+                    } else {
+                        notify.info('Service Worker not yet registered. Reload the page.');
+                    }
+                });
+            } else {
+                notify.warning('PWA not supported in this browser.');
+            }
+        }
+
+        function showPWAInfo() {
+            const info = `
+                <h3>📱 Progressive Web App Benefits</h3>
+                <ul style="text-align: left; padding-left: 1.5rem; color: var(--text-secondary);">
+                    <li>Install on home screen</li>
+                    <li>Works offline with cached content</li>
+                    <li>Fast loading with service workers</li>
+                    <li>Native app-like experience</li>
+                    <li>Updates automatically</li>
+                </ul>
+            `;
+
+            if (typeof DialogSystem !== 'undefined') {
+                DialogSystem.show('info', info, 'PWA Information');
+            } else {
+                alert(info.replace(/<[^>]*>/g, '\n'));
+            }
+        }
+
+        // Welcome notification
+        setTimeout(() => {
+            notify.info('👋 Welcome to the feature demo! Try pressing Ctrl+K', {
+                title: 'Pro Tip'
+            });
+        }, 1000);
+    </script>
+</body>
+
+</html>
